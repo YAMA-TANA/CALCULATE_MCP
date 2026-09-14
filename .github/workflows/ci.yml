@@ -39,12 +39,14 @@ jobs:
             calculate-mcp-0.2.0.mcpb
             calculate-mcp-0.2.0.sha256
           if-no-files-found: error
-      - name: Publish v0.2.0 GitHub Release
+      - name: Publish v0.2.0 GitHub Release once
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if ! gh release view v0.2.0 >/dev/null 2>&1; then
             gh release create v0.2.0 --target "$GITHUB_SHA" --title "CALCULATE_MCP v0.2.0" --notes "Deterministic calculation MCP with 13 tools for arithmetic, units, statistics, finance, matrices, complex numbers, calculus, probability, and dates."
+            gh release upload v0.2.0 calculate-mcp-0.2.0.mcpb calculate-mcp-0.2.0.sha256
+          else
+            echo "v0.2.0 already exists; keeping published assets immutable."
           fi
-          gh release upload v0.2.0 calculate-mcp-0.2.0.mcpb calculate-mcp-0.2.0.sha256 --clobber
