@@ -20,6 +20,11 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      - name: Validate Official MCP Registry metadata
+        run: |
+          curl -fsSL -o /tmp/mcp-publisher.tar.gz https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz
+          tar -xzf /tmp/mcp-publisher.tar.gz -C /tmp
+          /tmp/mcp-publisher validate server.json
       - name: Build MCPB bundle
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
