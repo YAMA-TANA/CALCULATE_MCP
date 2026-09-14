@@ -17,3 +17,22 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      - name: Build MCPB bundle
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          npm prune --omit=dev
+          rm -rf .mcpb-build
+          mkdir -p .mcpb-build
+          cp manifest.json package.json .mcpb-build/
+          cp -R dist node_modules .mcpb-build/
+          (cd .mcpb-build && zip -qr ../calculate-mcp-0.2.0.mcpb .)
+          sha256sum calculate-mcp-0.2.0.mcpb | tee calculate-mcp-0.2.0.sha256
+      - name: Upload MCPB artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculate-mcp-0.2.0
+          path: |
+            calculate-mcp-0.2.0.mcpb
+            calculate-mcp-0.2.0.sha256
+          if-no-files-found: error
