@@ -1,0 +1,47 @@
+{
+  "manifest_version": "0.3",
+  "name": "calculate-mcp",
+  "display_name": "CALCULATE_MCP",
+  "version": "0.2.0",
+  "description": "Deterministic calculation tools for LLMs via MCP.",
+  "long_description": "A deterministic numerical execution layer for LLMs. Includes expression evaluation, high-precision decimals, unit conversion, statistics, percentages, finance, root solving, matrices, complex numbers, numerical calculus, probability distributions, and date calculations.",
+  "author": {
+    "name": "YAMA-TANA",
+    "url": "https://github.com/YAMA-TANA"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YAMA-TANA/CALCULATE_MCP.git"
+  },
+  "homepage": "https://github.com/YAMA-TANA/CALCULATE_MCP",
+  "documentation": "https://github.com/YAMA-TANA/CALCULATE_MCP#readme",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/src/stdio.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/src/stdio.js"]
+    }
+  },
+  "tools": [
+    {"name": "calculate_expression", "description": "Evaluate arithmetic and scientific expressions safely."},
+    {"name": "calculate_decimal", "description": "Perform high-precision decimal arithmetic."},
+    {"name": "convert_units", "description": "Convert common physical and data units."},
+    {"name": "list_units", "description": "List supported unit symbols."},
+    {"name": "summarize_statistics", "description": "Compute descriptive statistics for numeric data."},
+    {"name": "calculate_percentage", "description": "Calculate percentages, changes, increases, and decreases."},
+    {"name": "calculate_finance", "description": "Compute compound values and loan payments."},
+    {"name": "solve_root", "description": "Find bracketed numerical roots with bisection."},
+    {"name": "calculate_matrix", "description": "Perform matrix arithmetic, inversion, determinants, and linear solves."},
+    {"name": "calculate_complex", "description": "Perform complex-number arithmetic and related operations."},
+    {"name": "calculate_calculus", "description": "Compute numerical derivatives and definite integrals."},
+    {"name": "calculate_probability", "description": "Evaluate normal, binomial, and Poisson probabilities."},
+    {"name": "calculate_date", "description": "Calculate date differences, weekdays, offsets, and business days."}
+  ],
+  "keywords": ["calculator", "math", "matrix", "calculus", "probability", "statistics", "units", "dates", "mcp"],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {"node": ">=22"}
+  }
+}
