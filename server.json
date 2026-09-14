@@ -14,7 +14,7 @@
     {
       "registryType": "mcpb",
       "identifier": "https://github.com/YAMA-TANA/CALCULATE_MCP/releases/download/v0.2.0/calculate-mcp-0.2.0.mcpb",
-      "fileSha256": "24e8b9c82c92d7ac870daf6079d38ac1206709c1ecc5f4f9dcebd61f1cd53bb6",
+      "fileSha256": "d95ae8d7f251fd2dca0cb01a380567ec90848d396cf99a4d28db8ae457efa5b8",
       "transport": {
         "type": "stdio"
       }
