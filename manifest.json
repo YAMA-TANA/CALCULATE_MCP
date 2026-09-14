@@ -1,0 +1,33 @@
+{
+  "manifest_version": "0.3",
+  "name": "calculate-mcp",
+  "display_name": "CALCULATE_MCP",
+  "version": "0.2.0",
+  "description": "Deterministic calculation tools for LLMs via MCP.",
+  "long_description": "A deterministic numerical execution layer for LLMs. Includes expression evaluation, high-precision decimals, unit conversion, statistics, percentages, finance, root solving, matrices, complex numbers, numerical calculus, probability distributions, and date calculations.",
+  "author": {
+    "name": "YAMA-TANA",
+    "url": "https://github.com/YAMA-TANA"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YAMA-TANA/CALCULATE_MCP.git"
+  },
+  "homepage": "https://github.com/YAMA-TANA/CALCULATE_MCP",
+  "documentation": "https://github.com/YAMA-TANA/CALCULATE_MCP#readme",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/src/stdio.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/src/stdio.js"]
+    }
+  },
+  "tools_generated": true,
+  "keywords": ["calculator", "math", "matrix", "calculus", "probability", "statistics", "units", "dates", "mcp"],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {"node": ">=22"}
+  }
+}
