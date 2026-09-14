@@ -119,7 +119,7 @@ Example local MCP client configuration:
   "mcpServers": {
     "calculate": {
       "command": "node",
-      "args": ["/absolute/path/to/CALCULATE_MCP/dist/stdio.js"]
+      "args": ["/absolute/path/to/CALCULATE_MCP/dist/src/stdio.js"]
     }
   }
 }
