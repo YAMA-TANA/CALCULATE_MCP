@@ -1,4 +1,4 @@
-import Decimal from 'decimal.js';
+import { Decimal } from 'decimal.js';
 import { Parser } from 'expr-eval';
 
 export type JsonRecord = Record<string, unknown>;
@@ -257,7 +257,7 @@ export function solveRoot(
   let a = lower;
   let b = upper;
   let fa = f(a);
-  let fb = f(b);
+  const fb = f(b);
   if (fa === 0) return { expression, root: a, f_at_root: 0, iterations: 0, method: 'bisection' };
   if (fb === 0) return { expression, root: b, f_at_root: 0, iterations: 0, method: 'bisection' };
   if (Math.sign(fa) === Math.sign(fb)) throw new Error('f(lower) and f(upper) must have opposite signs for bisection.');
@@ -273,7 +273,6 @@ export function solveRoot(
       fa = fm;
     } else {
       b = mid;
-      fb = fm;
     }
   }
   return { expression, root: mid, f_at_root: fm, iterations: iterations + 1, tolerance, method: 'bisection' };
