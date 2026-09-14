@@ -1,0 +1,54 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.YAMA-TANA/calculate-mcp",
+  "title": "CALCULATE_MCP",
+  "description": "Deterministic MCP calculator for arithmetic, matrices, calculus, probability, dates, and units.",
+  "websiteUrl": "https://github.com/YAMA-TANA/CALCULATE_MCP",
+  "repository": {
+    "url": "https://github.com/YAMA-TANA/CALCULATE_MCP.git",
+    "source": "github",
+    "id": "1369570232"
+  },
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/YAMA-TANA/CALCULATE_MCP/releases/download/v0.2.0/calculate-mcp-0.2.0.mcpb",
+      "fileSha256": "24e8b9c82c92d7ac870daf6079d38ac1206709c1ecc5f4f9dcebd61f1cd53bb6",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "YAMA-TANA",
+      "documentation": "https://github.com/YAMA-TANA/CALCULATE_MCP#readme",
+      "keywords": [
+        "calculator",
+        "math",
+        "matrix",
+        "calculus",
+        "probability",
+        "statistics",
+        "units",
+        "dates",
+        "mcp"
+      ],
+      "examples": [
+        {
+          "name": "Exact calculations",
+          "description": "Evaluate arithmetic and high-precision decimal calculations instead of relying on LLM mental math."
+        },
+        {
+          "name": "Matrix and calculus",
+          "description": "Solve linear systems, invert matrices, differentiate functions, and evaluate definite integrals."
+        },
+        {
+          "name": "Probability and dates",
+          "description": "Calculate common probability distributions and deterministic calendar or business-day results."
+        }
+      ]
+    }
+  }
+}
