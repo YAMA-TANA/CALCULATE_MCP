@@ -2,7 +2,7 @@
 
 Deterministic calculation tools for LLMs via the Model Context Protocol (MCP).
 
-Instead of asking a language model to do arithmetic in its hidden reasoning, CALCULATE_MCP gives it explicit tools for numeric work: expression evaluation, high-precision decimal arithmetic, unit conversion, descriptive statistics, percentages, finance, and numerical root solving.
+Instead of asking a language model to do arithmetic in hidden reasoning, CALCULATE_MCP gives it explicit deterministic tools for arithmetic, high-precision decimals, units, statistics, finance, matrices, complex numbers, numerical calculus, probability distributions, date math, and root solving.
 
 Built for the **2026 MCP TypeScript SDK v2** and usable over both Streamable HTTP and stdio.
 
@@ -17,11 +17,16 @@ Built for the **2026 MCP TypeScript SDK v2** and usable over both Streamable HTT
 | `summarize_statistics` | Mean, median, variance, standard deviation, quartiles, IQR |
 | `calculate_percentage` | Percent-of, percent ratio, increase/decrease, percentage change |
 | `calculate_finance` | Compound FV/PV and periodic loan payments |
-| `solve_root` | Robust bracketed numerical root solving with bisection |
+| `solve_root` | Bracketed numerical root solving with bisection |
+| `calculate_matrix` | Add/subtract/multiply/transpose/determinant/inverse/solve Ax=b |
+| `calculate_complex` | Complex add/subtract/multiply/divide/abs/arg/conjugate/pow/sqrt |
+| `calculate_calculus` | Numerical derivative and definite integral |
+| `calculate_probability` | Normal PDF/CDF, binomial PMF/CDF, Poisson PMF/CDF |
+| `calculate_date` | ISO date add/difference/weekday/business-day calculations |
 
 ## Why another calculator MCP?
 
-The point is not to replace a pocket calculator. The point is to give an LLM a small, deterministic numerical execution layer that it can call whenever a response depends on exact arithmetic.
+The point is not to replace a pocket calculator. The point is to give an LLM a deterministic numerical execution layer that it can call whenever a response depends on exact arithmetic or repeatable numerical methods.
 
 The expression evaluator does **not** use JavaScript `eval`. Expressions are parsed by a dedicated math parser with assignment, logical expressions, conditionals, concatenation, and membership operators disabled.
 
@@ -36,13 +41,41 @@ For decimal-sensitive work such as `0.1 + 0.2`, use `calculate_decimal`:
 }
 ```
 
-Result:
+Result: `0.3`.
+
+## Advanced examples
+
+Matrix solve:
 
 ```json
 {
-  "result": "0.3"
+  "operation": "solve",
+  "a": [[2, 1], [1, -1]],
+  "b": [5, 1]
 }
 ```
+
+Numerical derivative:
+
+```json
+{
+  "operation": "derivative",
+  "expression": "x^3",
+  "x": 2
+}
+```
+
+Normal CDF:
+
+```json
+{
+  "distribution": "normal",
+  "operation": "cdf",
+  "params": { "x": 1.96, "mean": 0, "sd": 1 }
+}
+```
+
+Date math uses `YYYY-MM-DD` and UTC calendar semantics. `business_days` counts Monday-Friday and does **not** remove public holidays.
 
 ## Run over HTTP
 
@@ -54,17 +87,8 @@ npm run build
 npm start
 ```
 
-The MCP endpoint is:
-
-```text
-http://localhost:3000/mcp
-```
-
-Health check:
-
-```text
-GET /health
-```
+MCP endpoint: `http://localhost:3000/mcp`  
+Health check: `GET /health`
 
 Environment variables:
 
@@ -74,7 +98,7 @@ Environment variables:
 | `HOST` | `0.0.0.0` | Bind address |
 | `ALLOWED_HOSTS` | unset | Comma-separated public hostnames for Host validation |
 
-For a public deployment, set `ALLOWED_HOSTS` to the hostname(s) serving the MCP endpoint, for example:
+For public deployment, set `ALLOWED_HOSTS`, for example:
 
 ```bash
 ALLOWED_HOSTS=calculate.example.com npm start
@@ -88,7 +112,7 @@ npm run build
 npm run start:stdio
 ```
 
-Example local MCP client configuration after cloning this repository:
+Example local MCP client configuration:
 
 ```json
 {
@@ -120,16 +144,15 @@ Functions include `abs`, `sqrt`, `sin`, `cos`, `tan`, inverse/hyperbolic trig, `
 
 ## Supported units
 
-Call `list_units` for the machine-readable list. Current categories include:
+Call `list_units` for the machine-readable list. Categories include length, mass, time, area, volume, speed, data size, and temperature.
 
-- length: `m`, `km`, `cm`, `mm`, `um`, `nm`, `in`, `ft`, `yd`, `mi`, `nmi`
-- mass: `kg`, `g`, `mg`, `ug`, `lb`, `oz`, `stone`, `tonne`
-- time: `s`, `ms`, `min`, `h`, `day`, `week`
-- area: `m2`, `km2`, `cm2`, `mm2`, `ha`, `acre`, `ft2`, `in2`
-- volume: `L`, `mL`, `m3`, `cm3`, `tsp`, `tbsp`, `cup`, `floz`, `pint`, `quart`, `gallon`
-- speed: `m/s`, `km/h`, `mph`, `knot`, `ft/s`
-- data: `B`, `KB`, `MB`, `GB`, `TB`, `KiB`, `MiB`, `GiB`, `TiB`
-- temperature: `C`, `F`, `K`
+## Numerical-method notes
+
+- Matrix inverse/solve use Gaussian elimination with partial pivoting.
+- Derivatives use a five-point central difference.
+- Definite integrals use Simpson's rule.
+- Root solving uses bisection and requires a sign-changing bracket.
+- Probability functions are deterministic numerical implementations; they are not intended as a replacement for specialized high-precision statistical libraries in extreme-tail scientific work.
 
 ## Development
 
