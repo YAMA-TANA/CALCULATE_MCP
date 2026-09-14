@@ -1,7 +1,7 @@
 {
   "name": "calculate-mcp",
-  "version": "0.1.0",
-  "description": "A deterministic calculation MCP server for expressions, decimals, units, statistics, percentages, finance, and numerical root solving.",
+  "version": "0.2.0",
+  "description": "A deterministic calculation MCP server for arithmetic, matrices, complex numbers, calculus, probability, dates, units, statistics, finance, and numerical solving.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -39,6 +39,9 @@
     "model-context-protocol",
     "calculator",
     "math",
+    "matrix",
+    "calculus",
+    "probability",
     "units",
     "statistics"
   ]
